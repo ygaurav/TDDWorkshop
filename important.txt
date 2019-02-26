@@ -1,0 +1,7 @@
+Scheduled by- GetUser(GetInterview(CreateInterview.Id).Interview.ScheduledBy).User.Name
+Job Title- GetPosition2(GetInterview(CreateInterview.Id).Interview.PositionId).Position2.JobTitle
+Interview date- GetInterview(CreateInterview.Id).Interview.Date
+interview start time-GetInterview(CreateInterview.Id).Interview.StartTime
+Candidate name-GetCandidate(GetInterview(CreateInterview.Id).Interview.CandidateId).Candidate.Name
+Interviewer name-GetUser(GetInterview(CreateInterview.Id).Interview.PrimaryInterviewerId).User.Name
+Interview levelid-interviewid(input parameter)
