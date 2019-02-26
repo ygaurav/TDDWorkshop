@@ -1,0 +1,27 @@
+{
+  "name": "tddworkshop",
+  "version": "1.0.0",
+  "description": "- To learn how to write unit tests.\r - To learn how to write test before functionality (TDD)\r - To build & improve testable code incrementally.\r - To win a trip to ………🏖.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -r ts-node/register src/**/*.spec.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ygaurav/TDDWorkshop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ygaurav/TDDWorkshop/issues"
+  },
+  "homepage": "https://github.com/ygaurav/TDDWorkshop#readme",
+  "dependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.3333"
+  }
+}
