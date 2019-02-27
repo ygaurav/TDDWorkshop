@@ -15,4 +15,8 @@ describe('Hello function', () => {
     expect(taskManager.AddTask('Hi')).to.equal(2);
   });
 
+  it('check for task fetching ID', () => {
+    var taskManager = new TaskManager();
+    expect(taskManager.GetTask(2));
+  });
 });

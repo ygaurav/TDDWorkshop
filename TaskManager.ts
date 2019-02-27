@@ -14,6 +14,9 @@ export class TaskManager {
          return this.task_id;
       }
    }
+   GetTask(task_id: number) {
+      console.log(task_id);
+   }
 }
 
 export class Task {
