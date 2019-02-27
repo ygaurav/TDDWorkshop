@@ -1,3 +1,9 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -9,16 +15,74 @@ public class TaskManager
 		int id;
 		String query;
 		boolean isActive;
+		Date deadLine;
 		List<Task> taskList;
 
-		public int saveTask(String query)
+		public int saveTask(String query) throws ParseException
 		{
+			String[] queryStrings;
 			Task task = new Task();
+			int countString = 0;
 			task.id = ID_GENERATOR.getAndIncrement();
-			task.query = query;
-			task.isActive = true;
-			taskList.add(task);
-			return task.id;
+			queryStrings = query.split(" ");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			Calendar calendar = new GregorianCalendar();
+			Date date = new Date();
+			for (String string : queryStrings) {
+				if(string.contains("@")) {
+					countString++;
+				}
+			}
+			for (String string : queryStrings) {
+				if(string.contains("@")) {
+					countString++;
+				}
+				if(countString != 1) {
+					countString--;
+					break;
+				} else {
+					if(string.contains("@")) {
+						if(string.length() == 1) {
+							calendar.add(Calendar.DAY_OF_MONTH, 7);
+							try {
+								date = sdf.parse(calendar.getTime()+"");
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+						else if(Character.isDigit(string.charAt(1))) {
+							if(string.length() > 1) {
+								try {
+									date = sdf.parse(string);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							} else if(string.length() == 1) {
+								calendar.add(Calendar.DAY_OF_MONTH, 7);
+								try {
+									date = sdf.parse(calendar.getTime()+"");
+								} catch (Exception e) {
+								}
+							}
+						}
+						if((sdf.format(date).equals(sdf.format(new Date()))) || (date.after(new Date())))
+							deadLine = date;
+					}
+				}
+			}
+			
+			
+			
+			
+			
+			if(deadLine != null)
+			{
+				task.query = query;
+				task.isActive = true;
+				taskList.add(task);
+				return task.id;
+			}
+			return -1;
 		}
 		
 		public Task getTaskById(int id)
@@ -49,17 +113,18 @@ public class TaskManager
 		}
 	}
 
-	public boolean AddTask (String query)
-	{
+	public boolean AddTask (String query) {
 		if((query == "") || (query == null))
 			return false;
 		return true;
 	}
 	
-	public int SaveTaskId(String query) {
+	public int SaveTaskId(String query) throws ParseException {
 		Task task = new Task();
 		if(this.AddTask(query))
-			return task.saveTask(query);
+			if(task.saveTask(query) != -1) {
+				return 1;
+			}
 		return -1;
 	}
 
@@ -67,7 +132,6 @@ public class TaskManager
 		Task task = new Task();
 		return task.getTaskById(taskId);
 	}
-	
 
 	public int getTaskCount() {
 		Task task = new Task();
