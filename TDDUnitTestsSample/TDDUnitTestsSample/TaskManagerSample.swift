@@ -11,7 +11,7 @@ import Foundation
 
 class TaskManager: NSObject {
     
-    var taskIdList = [Int]()
+    var taskIdList = [Task]()
     
     func addTask(_ testString: String) -> Bool {
         guard !testString.isEmpty else {
@@ -20,14 +20,26 @@ class TaskManager: NSObject {
         return true
     }
     
-    func createTaskId() {
+    func createTaskId(_ description: String, deadline: String) {
         taskIdList.removeAll()
-        let taskId = Int.random(in: 900 ..< 1000)
-        guard taskId != 0 else {
-            taskIdList.append(-1)
+        
+        let taskObj = Task()
+        taskObj.id = randomString(length: 10)
+        taskObj.description = description
+        taskObj.deadline = deadline
+        
+        guard !taskObj.id.isEmpty else {
+            let taskEmpty = Task()
+            taskEmpty.id = "-1"
+            taskIdList.append(taskEmpty)
             return
         }
-        taskIdList.append(taskId)
+        taskIdList.append(taskObj)
+    }
+    
+    func randomString(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0...length-1).map{ _ in letters.randomElement()! })
     }
     
     func getTaskID (_ taskId: Int) -> Int {
@@ -50,4 +62,10 @@ class TaskManager: NSObject {
         }
         return false
     }
+}
+
+class  Task {
+    var id = ""
+    var description = ""
+    var deadline = ""
 }
