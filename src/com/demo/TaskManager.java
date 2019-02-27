@@ -1,12 +1,28 @@
 package com.demo;
 
-public class TaskManager {
+import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
-    public boolean addTask(String taskName)
+public class TaskManager {
+    private static final AtomicInteger count = new AtomicInteger(0);
+    public HashMap<Integer,String> taskList=new HashMap<>();
+
+    public int addTask(String taskName)
     {
-        if(taskName!=null&&taskName!="")
-            return true;
-        else
-            return false;
+        int id=count.incrementAndGet();
+        taskList.put(id,taskName);
+        return id;
     }
+     public  String getTask(int id)
+     {
+         if(taskList.get(id)==null)
+            return "No Task Added with that key";
+         else
+             return taskList.get(id);
+     }
+
+     public int getTaskCount()
+     {
+         return taskList.size();
+     }
 }
