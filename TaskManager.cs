@@ -10,7 +10,7 @@ namespace TDDWeb.Models
     {
         public int TaskID { get; set; }
         public string TaskName { get; set; }
-        public DateTime DeadLine { get; set; }
+        public DateTime Deadline { get; set; }
     }
 
     public class TaskManager
@@ -31,22 +31,34 @@ namespace TDDWeb.Models
         }
 
 
-        public List<Task> SaveTask(string taskname)
+        public List<Task> SaveTask(string TaskName)
         {
             task = new Task();
             List<Task> arrTasks = new List<Task>();
-
-            if (!string.IsNullOrEmpty(taskname))
+            try
             {
-                task.TaskID++;
-                task.TaskName = taskname;
-                arrTasks.Add(task);
-            }
-            else if (task.TaskID == -1 || task.TaskID == 0)
-            {
-                return arrTasks;
-            }
+                if (!string.IsNullOrEmpty(TaskName))
+                {
 
+                    task.TaskID++;
+                    task.TaskName = TaskName;
+                    DateTime filtereddate = FilterDate(TaskName);
+                    if (filtereddate != DateTime.MinValue)
+                        task.Deadline = filtereddate;
+                    else
+                    {
+
+                        return arrTasks;
+                    }
+
+                    arrTasks.Add(task);
+                }
+                else if (task.TaskID == -1 || task.TaskID == 0)
+                {
+                    return arrTasks;
+                }
+            }
+            catch { }
             return arrTasks;
         }
 
@@ -81,8 +93,25 @@ namespace TDDWeb.Models
         {
             List<Task> actualListofTask = new List<Task>();
             List<Task> deadlinePassed = new List<Task>();
-            deadlinePassed = actualListofTask.Where(t => t.DeadLine > DateTime.Now).ToList<Task>();
+            deadlinePassed = actualListofTask.Where(t => t.Deadline > DateTime.Now).ToList<Task>();
             return deadlinePassed;
+        }
+
+        private DateTime FilterDate(string stringdate)
+        {
+            string date = stringdate.Substring(stringdate.LastIndexOf('@') + 1);
+
+            DateTime dateTime2;
+            if (DateTime.TryParse(date, out dateTime2))
+            {
+                Console.WriteLine(dateTime2);
+                DateTime dt = DateTime.Parse(date);
+            }
+            else
+            {
+                return DateTime.MinValue;
+            }
+            return Convert.ToDateTime(date);
         }
     }
 
