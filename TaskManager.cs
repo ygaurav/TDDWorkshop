@@ -10,6 +10,7 @@ namespace TDDWeb.Models
     {
         public int TaskID { get; set; }
         public string TaskName { get; set; }
+        public DateTime DeadLine { get; set; }
     }
 
     public class TaskManager
@@ -74,6 +75,14 @@ namespace TDDWeb.Models
             {
                 return false;
             }
+        }
+
+        public List<Task> TaskDeadLinePassed()
+        {
+            List<Task> actualListofTask = new List<Task>();
+            List<Task> deadlinePassed = new List<Task>();
+            deadlinePassed = actualListofTask.Where(t => t.DeadLine > DateTime.Now).ToList<Task>();
+            return deadlinePassed;
         }
     }
 

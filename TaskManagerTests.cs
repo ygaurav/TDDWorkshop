@@ -65,5 +65,12 @@ namespace TDDWeb.Tests
             Assert.IsTrue(flag);
         }
 
+        [TestMethod]
+        public void TaskDeadLinePassed()
+        {
+            TaskManager task = new TaskManager();
+            List<Task> result = task.TaskDeadLinePassed();
+            Assert.IsFalse(result.Count>0);
+        }
     }
 }
