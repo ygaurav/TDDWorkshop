@@ -22,4 +22,18 @@ public class TaskManagerTest {
 		boolean flag = task.AddTask("Bhavesh");
 		assertEquals(true, flag);
 	}
+	
+	@Test
+	public void testTaskManagerSaveTaskFailed() {
+		TaskManager task = new TaskManager();
+		int val = task.SaveTaskId("");
+		assertEquals(-1, val);
+	}
+	
+	@Test
+	public void testTaskManagerSaveTaskPassed() {
+		TaskManager task = new TaskManager();
+		int val = task.SaveTaskId("Bhavesh");
+		assertEquals(-1, val);
+	}
 }
