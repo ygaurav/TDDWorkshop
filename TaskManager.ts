@@ -1,6 +1,6 @@
 export class TaskManager {
 
-   public TaskCreate: any[];
+   public TaskCreate: Task[] = [];
    public task_id: number = 1;
 
    AddTask(input: string): number {
@@ -11,11 +11,19 @@ export class TaskManager {
          var TaskCreated = new Task();
          TaskCreated.index = this.task_id;
          TaskCreated.task = input;
+         if (this.task_id == 1) {
+            this.TaskCreate.push(TaskCreated);
+         }
+         else
+            this.TaskCreate.push(TaskCreated);
+
          return this.task_id;
       }
    }
-   GetTask(task_id: number) {
-      console.log(task_id);
+
+   GetTaskCount() {
+      console.log('this.TaskCreate.length', this.TaskCreate.length);
+      return this.TaskCreate.length;
    }
 }
 
