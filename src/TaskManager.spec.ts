@@ -5,10 +5,14 @@ import 'mocha';
 
 describe('Hello function', () => {
 
-  it('check for task create' , () => {
-    var taskManager =  new TaskManager() ;
-    expect(taskManager.AddTask(null)).to.equal(false);
-    
+  it('check for task create', () => {
+    var taskManager = new TaskManager();
+    expect(taskManager.AddTask('hello')).to.equal(2);
+  });
+
+  it('check for task create', () => {
+    var taskManager = new TaskManager();
+    expect(taskManager.AddTask('Hi')).to.equal(2);
   });
 
 });
