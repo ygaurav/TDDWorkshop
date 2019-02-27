@@ -1,28 +1,45 @@
-/*
 package com.demo.com.demo.test;
 
 import com.demo.TaskManager;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TaskManagerTest {
-
+    TaskManager taskManager;
     @Test
     public void testAddTaskForNull(){
-        TaskManager taskManager=new TaskManager();
-        Assert.assertEquals(false,taskManager.addTask(null));
+        taskManager=new TaskManager();
+        Assert.assertEquals(-1,taskManager.addTask(null));
     }
 
     @Test
     public void testAddTaskForEmpty(){
-        TaskManager taskManager=new TaskManager();
-        Assert.assertEquals(false,taskManager.addTask(""));
+        taskManager=new TaskManager();
+        Assert.assertEquals(-1,taskManager.addTask(""));
     }
 
     @Test
     public void testAddTaskWithCorrectInput(){
-        TaskManager taskManager=new TaskManager();
-        Assert.assertEquals(true,taskManager.addTask("Commit Code"));
+        taskManager=new TaskManager();
+        Assert.assertEquals(1,taskManager.addTask("Commit Code"));
     }
+
+    //Test for getTask
+    @Test
+    public void testGetTaskWithCorrectId(){
+        taskManager=new TaskManager();
+        taskManager.addTask("test");
+        Assert.assertEquals("test",taskManager.getTask(1));
+    }
+
+    @Test
+    public void testGetTaskWithInCorrectId(){
+        taskManager=new TaskManager();
+        taskManager.addTask("test");
+        Assert.assertEquals("No Task Added with that key",taskManager.getTask(2));
+    }
+
+    //Test
 }
-*/
+
