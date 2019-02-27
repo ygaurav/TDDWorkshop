@@ -54,6 +54,27 @@ namespace TDDWeb.Models
             return list.Count;
 
         }
+
+        public Task GetTaskById(int TaskId)
+        {
+            List<Task> taskList = new List<Task>();
+            Task task = taskList.Where(x => x.TaskID == TaskId).FirstOrDefault();
+            return task;
+        }
+        public bool DeleteTask(int TaskID)
+        {
+            List<Task> taskList = new List<Task>();
+            Task task = taskList.Where(x => x.TaskID == TaskID).FirstOrDefault();
+            if (task != null)
+            {
+                taskList.Remove(task);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
    

@@ -8,23 +8,21 @@ namespace TDDWeb.Tests
     [TestClass]
     public class TaskManagerTests
     {
-        
-
 
         [TestMethod]
         public void AddTask()
         {
             TaskManager task = new TaskManager();
             bool result = task.AddTask("Test");
-            Assert.IsNotNull(result);
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
         public void SaveTask()
         {
             TaskManager task = new TaskManager();
-             List<Task> result = task.SaveTask("Test");
-             Assert.IsNotNull(result);
+            List<Task> result = task.SaveTask("Test");
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
@@ -43,5 +41,29 @@ namespace TDDWeb.Tests
 
             Assert.AreEqual(taskOriginalCount, returnCount);
         }
+
+        [TestMethod]
+        public void DeleteTask()
+        {
+            TaskManager task = new TaskManager();
+            bool result = task.DeleteTask(1);
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void GetTaskById()
+        {
+            TaskManager task = new TaskManager();
+            Task actualTask = task.GetTaskById(1);
+            actualTask = new Task { TaskID = 1, TaskName = "Test" };
+            Task expectedTask = new Task { TaskID = 1, TaskName = "Test" };
+            bool flag = false;
+            if(actualTask.TaskID==expectedTask.TaskID)
+            {
+               flag= true;
+            }
+            Assert.IsTrue(flag);
+        }
+
     }
 }
