@@ -21,6 +21,7 @@ class TaskManager: NSObject {
     }
     
     func createTaskId() {
+        taskIdList.removeAll()
         let taskId = Int.random(in: 900 ..< 1000)
         guard taskId != 0 else {
             taskIdList.append(-1)

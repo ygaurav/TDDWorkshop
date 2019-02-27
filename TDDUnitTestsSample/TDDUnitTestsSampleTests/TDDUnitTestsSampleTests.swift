@@ -20,18 +20,18 @@ class TDDUnitTestsSampleTests: XCTestCase {
     override func tearDown() {
         taskManagerObj = nil
     }
-
-    func testCheckEmptyString() {
-        XCTAssert(taskManagerObj.addTask(""))
-    }
     
     func testRandomNoCreation() {
         taskManagerObj.createTaskId()
-        XCTAssertNil(taskManagerObj.getTaskID(999), "Task id is not empty")
+        XCTAssertTrue(!taskManagerObj.taskIdList.isEmpty, "Task id is empty")
+    }
+    
+    func testFetchTaskId() {
+        XCTAssertNil(taskManagerObj.getTaskID(999), "TaskId not present in the list")
     }
     
     func testDeleteTask() {
-        XCTAssertTrue(taskManagerObj.deleteTask(999))
+        XCTAssertTrue(taskManagerObj.deleteTask(999), "TaskId not present in the list")
     }
 
 }
