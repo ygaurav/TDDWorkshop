@@ -40,4 +40,16 @@ describe('Hello function', () => {
     var taskManager = new TaskManager();
     expect(taskManager.AddTask('hello@ 11/12/1996')).to.equal(0);
   });
+
+  it('check for task With deadline not provided', () => {
+    var taskManager = new TaskManager();
+    expect(taskManager.AddTask('hello@')).to.equal(2);
+  });
+
+  it('check for tasks with Deadline passed', () => {
+    var taskManager = new TaskManager();
+    taskManager.AddTask('hello@')
+    taskManager.AddTask('hello@25/02/1972')
+    expect(taskManager.getPastTask());
+  });
 });
