@@ -25,6 +25,12 @@ export class TaskManager {
       console.log('this.TaskCreate.length', this.TaskCreate.length);
       return this.TaskCreate.length;
    }
+
+   removeTask(index) {
+      this.TaskCreate.splice(index);
+      return 1;
+   }
+
 }
 
 export class Task {
