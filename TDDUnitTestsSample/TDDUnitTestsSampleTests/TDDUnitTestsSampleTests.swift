@@ -24,4 +24,14 @@ class TDDUnitTestsSampleTests: XCTestCase {
     func testCheckEmptyString() {
         XCTAssert(taskManagerObj.addTask(""))
     }
+    
+    func testRandomNoCreation() {
+        taskManagerObj.createTaskId()
+        XCTAssertNil(taskManagerObj.getTaskID(999), "Task id is not empty")
+    }
+    
+    func testDeleteTask() {
+        XCTAssertTrue(taskManagerObj.deleteTask(999))
+    }
+
 }
