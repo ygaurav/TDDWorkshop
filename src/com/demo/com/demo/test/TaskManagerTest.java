@@ -30,14 +30,14 @@ public class TaskManagerTest {
     public void testGetTaskWithCorrectId(){
         taskManager=new TaskManager();
         taskManager.addTask("test");
-        Assert.assertEquals("test",taskManager.getTask(1));
+        Assert.assertEquals("test",taskManager.getTaskById(1));
     }
 
     @Test
     public void testGetTaskWithInCorrectId(){
         taskManager=new TaskManager();
         taskManager.addTask("test");
-        Assert.assertEquals("No Task Added with that key",taskManager.getTask(2));
+        Assert.assertEquals("No Task Added with that key",taskManager.getTaskById(2));
     }
 
     //Test
